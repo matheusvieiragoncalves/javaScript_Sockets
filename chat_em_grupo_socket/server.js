@@ -16,7 +16,9 @@ app.use('/', (req, res) => {
 
 let messages = [];
 
-io.on('connection', socket => {
+io.on('connect', socket => {
+  // console.log('Cliente conectado: ', socket.id);
+
   socket.emit('previousMessages', messages);
 
   socket.on('sendMessage', data => {
@@ -25,4 +27,6 @@ io.on('connection', socket => {
   });
 });
 
-server.listen(3000);
+server.listen(3000, () => {
+  console.log('Servidor rodando na URL: http://localhost:3000');
+});
